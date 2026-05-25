@@ -1,0 +1,53 @@
+-- יצירת טבלת רופאים
+CREATE TABLE Doctors (
+    DoctorId INT PRIMARY KEY NOT NULL,
+    FirstName NVARCHAR(50) NOT NULL,
+    LastName NVARCHAR(50) NOT NULL,
+    City NVARCHAR(50) NOT NULL,
+    Specialization NVARCHAR(50) NOT NULL
+);
+
+-- יצירת טבלת לקוחות
+CREATE TABLE Clients (
+    ClientId INT PRIMARY KEY NOT NULL,
+    FullName NVARCHAR(100) NOT NULL,
+    Phone NVARCHAR(20) NOT NULL,
+    City NVARCHAR(50) NOT NULL,
+    DateOfBirth DATE NOT NULL
+);
+
+-- יצירת טבלת ביקורים עם שם השדה המעודכן
+CREATE TABLE Visits (
+    VisitId INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    DoctorId INT NOT NULL,
+    ClientId INT NOT NULL,
+    DateAndHour DATETIME NOT NULL, 
+    
+    CONSTRAINT FK_Visits_Doctors FOREIGN KEY (DoctorId) REFERENCES Doctors(DoctorId),
+    CONSTRAINT FK_Visits_Clients FOREIGN KEY (ClientId) REFERENCES Clients(ClientId)
+);
+
+INSERT INTO Doctors (DoctorId, FirstName, LastName, City, Specialization)
+VALUES 
+(111111111, 'James', 'Wilson', 'London', 'Eyes'),    
+(222222222, 'Robert', 'Miller', 'London', 'Family'),   
+(333333333, 'Michael', 'Taylor', 'New York', 'Ears'),    
+(444444444, 'Linda', 'Anderson', 'Manchester', 'Eyes');  
+
+INSERT INTO Clients (ClientId, FullName, Phone, City, DateOfBirth)
+VALUES 
+(121212121, 'Alice Green', '050-1111111', 'London', '1990-01-01'),
+(131313131, 'Bob Brown', '052-2222222', 'London', '1985-05-12'),
+(141414141, 'Charlie Davis', '054-3333333', 'New York', '1978-11-23'),
+(151515151, 'Daniel White', '058-4444444', 'New York', '2005-07-09'),
+(161616161, 'Eve Black', '053-5555555', 'Manchester', '1995-03-30'),
+(171717171, 'Frank Harris', '055-6666666', 'Manchester', '1982-12-15');
+
+INSERT INTO Visits (DoctorId, ClientId, DateAndHour)
+VALUES 
+(111111111, 121212121, '2026-01-10 09:00:00'), 
+(222222222, 131313131, '2026-02-15 11:30:00'), 
+(333333333, 141414141, '2026-03-20 14:00:00'), 
+(444444444, 151515151, '2026-06-05 10:00:00'), 
+(111111111, 161616161, '2026-08-12 16:30:00'), 
+(222222222, 171717171, '2026-12-25 08:45:00'); 

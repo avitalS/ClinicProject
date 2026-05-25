@@ -1,0 +1,42 @@
+﻿<Window x:Class="UIToClinicProject.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ניהול מערכת - אדמין" Height="800" Width="1000" 
+        FlowDirection="RightToLeft" WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="פעולות ניהול וסינון" Grid.Row="0" Margin="0,0,0,15" Padding="10">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5,0,0,10">
+                    <TextBlock Text="בחר תאריך לבדיקה:" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="Bold"/>
+                    <DatePicker x:Name="dpAdminDate" Width="150" />
+                </StackPanel>
+
+                <WrapPanel>
+                    <Button Content="📊 עומס מחלקות" Click="Load_Click" Margin="5" Width="180" Height="35" Background="#8E44AD" Foreground="White"/>
+                    <Button Content="📥 ייבוא לקוחות מאקסל" Click="ImportClients_Click" Margin="5" Width="180" Height="35" Background="#27AE60" Foreground="White"/>
+                    <Button Content="📤 ייצוא שעות רופאים" Click="Export_Click" Margin="5" Width="180" Height="35" Background="#D35400" Foreground="White"/>
+                    <Button Content="👥 הצג את כל הלקוחות" Click="AllClients_Click" Margin="5" Width="180" Height="35" Background="#2980B9" Foreground="White"/>
+                    <Button Content="👨‍⚕️ הצג את כל הרופאים" Click="AllDoctors_Click" Margin="5" Width="180" Height="35" Background="#34495E" Foreground="White"/>
+                    <Button Content="📍 עיר עם כמות המקרים הדחופים הגבוהה ביותר" Click="BtnGetPriorityCity_Click" Width="309" Height="35" Background="#16A085" Foreground="White"/>
+                </WrapPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <DataGrid x:Name="dgAdmin" Grid.Row="1" 
+                  AutoGenerateColumns="True" 
+                  IsReadOnly="True" 
+                  AlternatingRowBackground="#F9F9F9" 
+                  GridLinesVisibility="Horizontal" 
+                  Margin="0,0,0,10"
+                  FontSize="14"/>
+
+        <TextBlock x:Name="lblStatus" Grid.Row="2" Text="מוכן" Margin="0,5,0,0" Foreground="Gray" FontWeight="Medium"/>
+    </Grid>
+</Window>
